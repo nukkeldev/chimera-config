@@ -1,0 +1,5 @@
+theme = "gruvbox_dark_hard"
+
+[editor]
+rulers = [100]
+bufferline = "multiple"
