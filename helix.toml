@@ -3,3 +3,7 @@ theme = "gruvbox_dark_hard"
 [editor]
 rulers = [100]
 bufferline = "multiple"
+
+[keys.normal]
+"-" = ":w"
+"S-x" = ":bc"
