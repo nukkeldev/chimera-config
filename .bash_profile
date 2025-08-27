@@ -18,3 +18,12 @@ alias  l="ll"
 
 # Start in a zellij shell by default
 eval "$(zellij setup --generate-auto-start bash)"
+
+# Inhibit lid behavior if in ssh
+if ! ( elogind-inhibit --list | grep -q "ssh-lid" ) && [[ -n "$SSH_TTY" ]]; then
+    echo "starting lid inhibitor for ssh session"
+    
+    doas /usr/bin/elogind-inhibit --what=handle-lid-switch --who=ssh --why=ssh-lid tail -f /dev/null &
+    INHIBIT_PID=$!
+    trap 'kill $INHIBIT_PID 2>/dev/null' EXIT HUP INT TERM
+fi
